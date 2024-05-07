@@ -4,20 +4,26 @@ function playSonido (idElementoAudio){
 }
 const listasDeTeclas = document.querySelectorAll('.tecla');
 
-let contador = 0;
 
-while (contador < 9){
+for(let contador = 0; contador < listasDeTeclas.length; contador++){
     const tecla = listasDeTeclas[contador];
     const instrumento = tecla.classList[1];
-    console.log(instrumento)
-
+ 
     const idAudio = `#sonido_${instrumento}`;
-    console.log(idAudio)
 
 
     tecla.onclick = function (){
        playSonido(idAudio);
-    } 
-    contador = contador + 1
-    console.log('vueltas ' +  contador)
-}
+    };
+    tecla.onkeydown = function(evento){
+        console.log(evento.code === 'Space')
+        if(evento.code ==='Space' || evento.code === 'Enter'){
+            tecla.classList.add('activa');                 
+        }
+       
+        tecla.onkeyup = function(){
+            tecla.classList.remove('activa');
+    }
+    
+    }
+};
